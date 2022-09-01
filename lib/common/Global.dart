@@ -1,11 +1,11 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:my_flutter/common/api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'api.dart';
 import '../models/profile.dart';
 import '../models/user.dart';
+
 // 可选主题色
 const _themes = <MaterialColor>[
   Colors.blue,

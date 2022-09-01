@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/common/api.dart';
 import 'package:provider/provider.dart';
 
-import '../common/Global.dart';
-import '../models/user.dart';
+import '../../common/api.dart';
+import '../../common/Global.dart';
+import '../../models/user.dart';
 
 class LoginRoute extends StatefulWidget {
   const LoginRoute({Key? key}) : super(key: key);

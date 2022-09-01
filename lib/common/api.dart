@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:my_flutter/models/index.dart';
+import '../models/index.dart';
 import 'Global.dart';
 export 'package:dio/dio.dart' show DioError;
 

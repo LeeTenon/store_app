@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:my_flutter/mocks/categories.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../../mocks/categories.dart';
 
 class Categories extends StatelessWidget {
   const Categories({

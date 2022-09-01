@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_store/routes/home/components/page_run.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:my_flutter/routes/home/components/categories.dart';
+
+import 'components/categories.dart';
 
 class HomeRoute extends StatefulWidget {
   const HomeRoute({Key? key}) : super(key: key);
@@ -67,6 +69,7 @@ class _HomeRouteState extends State<HomeRoute> {
             padding: EdgeInsets.symmetric(vertical: 20),
             // child: SearchForm(),
           ),
+          const PageRun(),
           const Categories(),
           // const NewArrivalProducts(),
           // const PopularProducts(),
