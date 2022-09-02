@@ -1,12 +1,7 @@
-import 'dart:math';
-
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
-import 'package:flutter_store/routes/home/components/popular.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../home/components/page_run.dart';
-import '../../../mocks/page_run.dart';
+import 'package:flutter_store/routes/home/screen/cart.dart';
+import 'screen/home.dart';
 
 class HomeRoute extends StatefulWidget {
   const HomeRoute({Key? key}) : super(key: key);
@@ -16,108 +11,82 @@ class HomeRoute extends StatefulWidget {
 }
 
 class _HomeRouteState extends State<HomeRoute> {
+  List<Widget> pagesList = [];
+  int curIndex = 0;
+
+  @override
+  void initState() {
+    pagesList = pagesList..add(const HomeScreen())..add(const CartSreen());
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: buildAppBar(),
-      body: body(),
+      body: pagesList[1], //可变
+      bottomNavigationBar: buttomBar(),
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      leading: IconButton(
-        onPressed: () {},
-        icon: SvgPicture.asset("assets/icons/menu.svg"),
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset("assets/icons/Location.svg"),
-          const SizedBox(width: 20),
-          Text(
-            "15/2 New Texas",
-            style: Theme.of(context).textTheme.bodyText1,
-          ),
-        ],
-      ),
-      actions: [
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/Notification.svg"),
-          onPressed: () {},
-        ),
+  Widget buttomBar() {
+    return BubbleBottomBar(
+      opacity: .2,
+      currentIndex: curIndex,
+      onTap: ((value) => setState(() {
+            curIndex = value!;
+          })),
+      borderRadius: const BorderRadius.vertical(top: Radius.circular(16)),
+      elevation: 0,
+      fabLocation: BubbleBottomBarFabLocation.end, //new
+      hasNotch: true, //new
+      hasInk: true, //new, gives a cute ink effect
+      inkColor: Colors.black12, //optional, uses theme color if not specified
+      items: const <BubbleBottomBarItem>[
+        BubbleBottomBarItem(
+            backgroundColor: Colors.red,
+            icon: Icon(
+              Icons.dashboard,
+              color: Colors.black,
+            ),
+            activeIcon: Icon(
+              Icons.dashboard,
+              color: Colors.red,
+            ),
+            title: Text("Home")),
+        BubbleBottomBarItem(
+            backgroundColor: Colors.deepPurple,
+            icon: Icon(
+              Icons.access_time,
+              color: Colors.black,
+            ),
+            activeIcon: Icon(
+              Icons.access_time,
+              color: Colors.deepPurple,
+            ),
+            title: Text("Logs")),
+        BubbleBottomBarItem(
+            backgroundColor: Colors.indigo,
+            icon: Icon(
+              Icons.folder_open,
+              color: Colors.black,
+            ),
+            activeIcon: Icon(
+              Icons.folder_open,
+              color: Colors.indigo,
+            ),
+            title: Text("Folders")),
+        BubbleBottomBarItem(
+            backgroundColor: Colors.green,
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+            activeIcon: Icon(
+              Icons.menu,
+              color: Colors.green,
+            ),
+            title: Text("Menu"))
       ],
-    );
-  }
-
-  SingleChildScrollView body() {
-    return SingleChildScrollView(
-      physics:
-          const BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
-      // padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Carousel(items: heroes, height: 250.0),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: const [
-                PopularList(),
-                ],
-            ),
-          )
-          // const NewArrivalProducts(),
-          // const PopularProducts(),
-        ],
-      ),
-    );
-  }
-}
-
-class PopularList extends StatefulWidget {
-  const PopularList({Key? key}) : super(key: key);
-
-  @override
-  State<PopularList> createState() => _PopularListState();
-}
-
-class _PopularListState extends State<PopularList> {
-  final List<Map<String, dynamic>> _items = List.generate(
-    10,
-    (index) => {
-      "id": index,
-      "title": "Item $index",
-      "height": Random().nextInt(150) + 50.5
-    },
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: MasonryGridView.count(
-        shrinkWrap: true,
-        itemCount: _items.length,
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-        // the number of columns
-        crossAxisCount: 2,
-        // vertical gap between two items
-        mainAxisSpacing: 4,
-        // horizontal gap between two items
-        crossAxisSpacing: 4,
-        itemBuilder: (context, index) {
-          return Card(
-            color: Colors.blue,
-            key: ValueKey(_items[index]['id']),
-            child: SizedBox(
-              height: _items[index]['height'],
-              child: Center(
-                child: Text(_items[index]['title']),
-              ),
-            ),
-          );
-        },
-      ),
     );
   }
 }
