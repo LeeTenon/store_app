@@ -1,9 +1,8 @@
-import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter_store/mocks/page_run.dart';
+import 'package:flutter_store/routes/home/component/popular.dart';
 import '../component/page_run.dart';
 
-import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -22,29 +21,48 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  AppBar buildAppBar() {
-    return AppBar(
-      leading: IconButton(
-        onPressed: () {},
-        icon: SvgPicture.asset("assets/icons/menu.svg"),
-      ),
-      title: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset("assets/icons/Location.svg"),
-          const SizedBox(width: 20),
-          Text(
-            "15/2 New Texas",
-            style: Theme.of(context).textTheme.bodyText1,
+  PreferredSize buildAppBar() {
+    return PreferredSize(
+      preferredSize: const Size.fromHeight(kToolbarHeight * 1),
+      child: AppBar(
+        elevation: 0,
+        backgroundColor: Colors.white,
+        leading: IconButton(
+          onPressed: () {},
+          icon: SvgPicture.asset("assets/icons/menu.svg"),
+        ),
+        title: SizedBox(
+          height: 40,
+          child: Padding(
+            padding: const EdgeInsets.all(0),
+            child: TextField(
+              onChanged: (String txt) {},
+              style: const TextStyle(
+                fontSize: 15,
+              ),
+              // cursorColor: HotelAppTheme.buildLightTheme().primaryColor,
+              decoration: InputDecoration(
+                fillColor: Colors.grey.shade300,
+                filled: true,
+                prefixIcon: const Icon(Icons.search),
+                contentPadding:
+                    const EdgeInsets.only(top: 0, bottom: 0, left: 20),
+                border: const OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  borderSide: BorderSide.none,
+                ),
+                hintText: '搜索',
+              ),
+            ),
+          ),
+        ),
+        actions: [
+          IconButton(
+            icon: SvgPicture.asset("assets/icons/Notification.svg"),
+            onPressed: () {},
           ),
         ],
       ),
-      actions: [
-        IconButton(
-          icon: SvgPicture.asset("assets/icons/Notification.svg"),
-          onPressed: () {},
-        ),
-      ],
     );
   }
 
@@ -57,64 +75,8 @@ class _HomeScreenState extends State<HomeScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Carousel(items: heroes, height: 250.0),
-          Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              children: const [
-                PopularList(),
-              ],
-            ),
-          )
-          // const NewArrivalProducts(),
-          // const PopularProducts(),
+          const PopularList(),
         ],
-      ),
-    );
-  }
-}
-
-class PopularList extends StatefulWidget {
-  const PopularList({Key? key}) : super(key: key);
-
-  @override
-  State<PopularList> createState() => _PopularListState();
-}
-
-class _PopularListState extends State<PopularList> {
-  final List<Map<String, dynamic>> _items = List.generate(
-    10,
-    (index) => {
-      "id": index,
-      "title": "Item $index",
-      "height": Random().nextInt(150) + 50.5
-    },
-  );
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: MasonryGridView.count(
-        shrinkWrap: true,
-        itemCount: _items.length,
-        padding: const EdgeInsets.symmetric(vertical: 30, horizontal: 10),
-        // the number of columns
-        crossAxisCount: 2,
-        // vertical gap between two items
-        mainAxisSpacing: 4,
-        // horizontal gap between two items
-        crossAxisSpacing: 4,
-        itemBuilder: (context, index) {
-          return Card(
-            color: Colors.blue,
-            key: ValueKey(_items[index]['id']),
-            child: SizedBox(
-              height: _items[index]['height'],
-              child: Center(
-                child: Text(_items[index]['title']),
-              ),
-            ),
-          );
-        },
       ),
     );
   }

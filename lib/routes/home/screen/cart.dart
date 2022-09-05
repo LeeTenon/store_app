@@ -108,7 +108,7 @@ class _CartSreenState extends State<CartSreen> {
             appBar: AppBar(
               elevation: 0,
               centerTitle: true,
-              title: Text(
+              title: const Text(
                 "购物车",
                 style: TextStyle(color: Colors.white),
               ),
@@ -119,14 +119,14 @@ class _CartSreenState extends State<CartSreen> {
                 const SizedBox(
                   height: 40,
                 ),
-                Container(
-                  alignment: Alignment.center,
-                  child: Image.asset(
-                    "images/wukong.png",
-                    height: 60,
-                    width: double.infinity,
-                  ),
-                ),
+                // Container(
+                //   alignment: Alignment.center,
+                //   child: Image.asset(
+                //     "images/wukong.png",
+                //     height: 60,
+                //     width: double.infinity,
+                //   ),
+                // ),
                 const Center(
                   child: Text("还没有登录哦"),
                 ),

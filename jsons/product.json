@@ -1,7 +1,11 @@
 {
-  "pid": "",
-  "name":"",
-  "price":0,
-  "picture_url":"",
-  "desc":""
+  "product_list": [
+    {
+      "pid": "1566677441878036480",
+      "title": "测试2",
+      "category": "电子产品",
+      "price": 26,
+      "cover_url": "http://iuyrf.mh/xqonvgm"
+    }
+  ]
 }

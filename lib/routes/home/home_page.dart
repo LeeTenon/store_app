@@ -23,7 +23,7 @@ class _HomeRouteState extends State<HomeRoute> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: pagesList[1], //可变
+      body: pagesList[curIndex], //可变
       bottomNavigationBar: buttomBar(),
     );
   }
